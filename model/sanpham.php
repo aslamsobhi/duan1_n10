@@ -47,12 +47,12 @@ function update_sanpham($category_id, $id, $name, $price, $description, $product
         $sql = "UPDATE `products` SET `category_id`='" . $category_id . "', `name`='" . $name . "',`price`='" . $price . "',`description`='" . $description . "' WHERE id=" . $id; 
     pdo_execute($sql);
 }
-function loadone_sanpham($id){
-    $sql = "select * from products where category_id=".$_GET['id'];
+function loadone_sanpham($id)
+{
+    $sql = "SELECT * FROM products WHERE id=" . $id;
     $sp = pdo_query_one($sql);
     return $sp;
 }
-
 function load_sanpham_cungloai($id,$category_id){
     $sql = "select * from products where category_id=".$category_id." and category_id <>".$id;
     $listsp = pdo_query($sql);

@@ -9,7 +9,7 @@ foreach ($dssp_new as $item) {
                             <div class="product__image">
                             <form action="index.php?act=themgiohang" method="post">
                                 <figure class="product__image--holder">
-                                <a href="index.php?act=chitietsp&id='.$category_id.'">
+                                <a href="index.php?act=chitietsp&id='.$id.'">
                                 <img src="'.$img_path.$product_image.'" alt="Product">
                                 </a>
                                      
@@ -17,15 +17,15 @@ foreach ($dssp_new as $item) {
                                 <a href="index.php?act=chitietsp" class="product-overlay"></a>
                                 <div class="product__action">
                                     
-                                     <a href="index.php?act=chitietsp&id='.$category_id.'" class="action-btn">
+                                     <a href="index.php?act=chitietsp&id='.$id.'" class="action-btn">
                                         <i class="fa fa-eye"></i>
                                         <span class="sr-only">Quick view</span>
                                     </a>
-                                    <a href="index.php?act=chitietsp&id='.$category_id.'" class="action-btn">
+                                    <a href="index.php?act=chitietsp&id='.$id.'" class="action-btn">
                                         <i class="fa fa-heart-o"></i>
                                         <span class="sr-only">Add to wishlist</span>
                                     </a>
-                                    <a href="index.php?act=chitietsp&id='.$category_id.'" class="action-btn">
+                                    <a href="index.php?act=chitietsp&id='.$id.'" class="action-btn">
                                         <i class="fa fa-repeat"></i>
                                         <span class="sr-only">Add To Compare</span>
                                     </a>
@@ -58,7 +58,7 @@ foreach ($dssp_new as $item) {
                             <div >
                                 <input type="submit" name="themgiohang" value="Mua Hàng" class="btn btn-primary"/>
                             </div>
-                            <input type="hidden" name="id" value="'.$category_id.'"/>
+                            <input type="hidden" name="id" value="'.$id.'"/>
                             <input type="hidden" name="tensp" value="'.$name.'"/>
                             <input type="hidden" name="gia" value="'.$price.'"/>
                             <input type="hidden" name="img" value="'.$product_image.'"/>

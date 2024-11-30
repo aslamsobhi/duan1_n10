@@ -20,9 +20,6 @@ if (isset($_GET['act']) && ($_GET['act'] != "")) {
             // Khởi tạo các biến mặc định
             $category_id = isset($_GET['category_id']) && $_GET['category_id'] > 0 ? $_GET['category_id'] : "";
             $keyw = isset($_POST['search']) ? trim($_POST['search']) : ""; 
-            // Xử lý giá trị tìm kiếm (nếu có)
-            
-            // Tải danh sách sản phẩm và danh mục
             $list_sp_danhmuc = loadAll_sanphampage($keyw, $category_id);
             $list_danhmuc = loadall_danhmuc();
             include 'view/sanpham.php';

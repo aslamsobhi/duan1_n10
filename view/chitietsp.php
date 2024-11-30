@@ -175,10 +175,8 @@
                         </form>
                     </div>
                 </div>
-
             </div>
             <div class="row justify-content-center mb--77 mb-md--57">
-
             </div>
             <div class="nav nav-tabs mb--35 mb-sm--25" id="product-tab" role="tablist">
                 <button type="button" class="nav-link active" id="nav-description-tab" data-bs-toggle="tab"
@@ -189,14 +187,16 @@
             <?php
         foreach ($load__sp__cungloai as $cungloai) {
         extract($cungloai);
-        $productLink = "index.php?act=chitietsp&id=" . htmlspecialchars($category_id);
+        $productLink = "index.php?act=chitietsp&id=" . htmlspecialchars($id);
         echo '
         <div class="col-lg-3 col-md-4 col-sm-6 mb--65 mb-md--50">
             <div class="payne-product">
                 <div class="product__inner">
                     <div class="product__image">
                         <figure class="product__image--holder">
-                            <img src="' . $img_path . $product_image. '" alt="' . $name . '">
+                            <a href="' . $productLink . '">
+                                <img src="'.$img_path.$product_image.'" alt="Product">
+                            </a>
                         </figure>
                         <a href="' . $productLink . '" class="product-overlay"></a>
                         <div class="product__action">

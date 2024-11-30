@@ -34,11 +34,9 @@
                                                 }
                                                 ?>
                                         </select>
-
                                     </div>
                                 </div>
                             </div>
-
                             <div class="col-md-7">
                                 <div class="shop-toolbar__right">
                                     <div class="product-view-mode ml--50 ml-xs--0">
@@ -65,19 +63,21 @@
                                     <div class="product__inner">
                                         <div class="product__image">
                                             <figure class="product__image--holder">
-                                                <img src="'.$img_path.$product_image.'" alt="Product">
+                                                <a href="index.php?act=chitietsp&id='.$id.'">
+                                                    <img src="'.$img_path.$product_image.'" alt="Product">
+                                                </a>
                                             </figure>
-                                            <a href="index.php?act=chitietsp&id='.$category_id.'" class="product__overlay"></a>
+                                            <a href="index.php?act=chitietsp&id='.$id.'" class="product__overlay"></a>
                                             <div class="product__action">
-                                                <a href="index.php?act=chitietsp&id='.$category_id.'" class="action-btn">
+                                                <a href="index.php?act=chitietsp&id='.$id.'" class="action-btn">
                                                    <i class="fa fa-eye"></i>
                                                     <span class="sr-only">Add to wishlist</span>
                                                 </a>
-                                                <a href="index.php?act=chitietsp&id='.$category_id.'" class="action-btn">
+                                                <a href="index.php?act=chitietsp&id='.$id.'" class="action-btn">
                                                     <i class="fa fa-heart-o"></i>
                                                     <span class="sr-only">Add to wishlist</span>
                                                 </a>
-                                                <a href="index.php?act=chitietsp&id='.$category_id.'"class="action-btn">
+                                                <a href="index.php?act=chitietsp&id='.$id.'"class="action-btn">
                                                     <i class="fa fa-repeat"></i>
                                                     <span class="sr-only">Add To Compare</span>
                                                 </a>
@@ -90,7 +90,7 @@
                                         <div class="product__info">
                                             <div class="product__info--left">
                                                 <h3 class="product__title">
-                                                    <a href="index.php?act=chitietsp&id='.$category_id.'">'.$name.'</a>
+                                                    <a href="index.php?act=chitietsp&id='.$id.'">'.$name.'</a>
                                                 </h3>
                                                 <div class="product__price">
                                                     <span class="money">'.$price.'</span>
@@ -114,9 +114,6 @@
                        ?>
                         </div>
                     </div>
-
-
-
                 </div>
                 <div class="col-xl-3 col-lg-4 order-lg-1">
                     <aside class="shop-sidebar">
@@ -135,11 +132,8 @@
                                     </li>';
                                 }
                                 ?>
-
-
                             </ul>
                         </div>
-
                     </aside>
                 </div>
             </div>

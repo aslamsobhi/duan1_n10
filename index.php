@@ -10,6 +10,7 @@ include 'model/danhmuc.php';
 include 'view/header.php';
 include 'global.php';
 include 'model/taikhoan.php';
+include 'model/donhang.php';
 
 $dssp_new=load_sanpham_home();
 
@@ -101,6 +102,17 @@ if (isset($_GET['act']) && ($_GET['act'] != "")) {
             include 'view/cart/giohang.php';
             break;
         case 'thanhtoan':
+            if((isset($_POST['thanhtoan']))&&($_POST['thanhtoan'])){
+                $total_price=$_POST['total_price'];
+                $customer_name=$_POST['customer_name'];
+                $shipping_address=$_POST['shipping_address'];
+                $customer_phone=$_POST['customer_phone'];
+                $customer_email=$_POST['customer_email'];
+                $payment_method=$_POST['payment_method'];
+                $product_variant_id=rand(0,9999);
+                $order_id= taodonhang($product_variant_id,$total_price,$payment_method,$customer_name,$shipping_address,$customer_phone,$customer_email);
+                
+            }
             include 'view/cart/thanhtoan.php';
             break;
             case 'dang_ky':

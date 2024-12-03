@@ -31,7 +31,7 @@
     <!-- Main Wrapper Start -->
     <div class="wrapper">
         <!-- Header Start -->
-        <!-- <header class="header header-default site-header">
+        <header class="header header-default site-header">
             <div class="header__outer">
                 <div class="header__inner header--fixed">
                     <div class="container">
@@ -110,5 +110,5 @@
                 </div>
                 <div class="header-sticky-height"></div>
             </div>
-        </header> -->
+        </header>
         <!-- Header End -->

@@ -38,7 +38,7 @@ if (isset($_GET['act']) && ($_GET['act'] != "")) {
                 include "view/home.php";
             }
             break;
-            case 'themgiohang':
+        case 'themgiohang':
                 if (isset($_POST['themgiohang']) && ($_POST['themgiohang'])) {
                     // Lấy dữ liệu từ form
                     $id = isset($_POST['id']) ? htmlspecialchars($_POST['id']) : '';
@@ -70,8 +70,8 @@ if (isset($_GET['act']) && ($_GET['act'] != "")) {
                     // Chuyển hướng đến trang giỏ hàng
                     header('Location: index.php?act=giohang');
                 }
-                break;
-            case 'xoagiohang':
+            break;
+        case 'xoagiohang':
                 if (isset($_GET['i']) && is_numeric($_GET['i']) && $_GET['i'] >= 0) {
                     // Kiểm tra nếu chỉ số `i` được truyền vào và có giá trị hợp lệ
                     if (isset($_SESSION['giohang']) && count($_SESSION['giohang']) > 0) {
@@ -102,20 +102,43 @@ if (isset($_GET['act']) && ($_GET['act'] != "")) {
             include 'view/cart/giohang.php';
             break;
         case 'thanhtoan':
-            if((isset($_POST['thanhtoan']))&&($_POST['thanhtoan'])){
-                $total_price=$_POST['total_price'];
-                $customer_name=$_POST['customer_name'];
-                $shipping_address=$_POST['shipping_address'];
-                $customer_phone=$_POST['customer_phone'];
-                $customer_email=$_POST['customer_email'];
-                $payment_method=$_POST['payment_method'];
-                $product_variant_id=rand(0,9999);
-                $order_id= taodonhang($product_variant_id,$total_price,$payment_method,$customer_name,$shipping_address,$customer_phone,$customer_email);
-                
-            }
-            include 'view/cart/thanhtoan.php';
+                if (isset($_POST['thanhtoan']) && $_POST['thanhtoan']) {
+                    // Lấy dữ liệu từ form và làm sạch đầu vào
+                    $total_price = isset($_POST['total_price']) ? trim($_POST['total_price']) : '';
+                    $customer_name = isset($_POST['customer_name']) ? trim(htmlspecialchars($_POST['customer_name'])) : '';
+                    $shipping_address = isset($_POST['shipping_address']) ? trim(htmlspecialchars($_POST['shipping_address'])) : '';
+                    $customer_phone = isset($_POST['customer_phone']) ? trim(htmlspecialchars($_POST['customer_phone'])) : '';
+                    $customer_email = isset($_POST['customer_email']) ? trim(htmlspecialchars($_POST['customer_email'])) : '';
+                    $payment_method = isset($_POST['payment_method']) ? trim($_POST['payment_method']) : '';
+                    
+                    // Kiểm tra xem tất cả các trường thông tin đã được điền đầy đủ hay chưa
+                    if (empty($customer_name) || empty($shipping_address) || empty($customer_phone) || empty($customer_email) || empty($payment_method)) {
+                        // Nếu thiếu thông tin, hiển thị thông báo lỗi và không thực hiện chuyển hướng
+                        $error_message = "Vui lòng điền đầy đủ thông tin!";
+                        
+                        // Dùng session để lưu thông báo lỗi
+                        $_SESSION['error_message'] = $error_message;
+                        
+                        // Quay lại trang thanh toán
+                        header('Location: index.php?act=thanhtoan');
+                        exit;
+                    } else {
+                        // Nếu tất cả thông tin hợp lệ, tạo đơn hàng và chuyển hướng đến trang cảm ơn
+                        $order = new Order();
+                        $order_id = $order->taodonhang($total_price, $payment_method, $customer_name, $shipping_address, $customer_phone, $customer_email);
+                        
+                        // Dùng session để lưu thông tin đơn hàng nếu cần
+                        $_SESSION['order_id'] = $order_id;
+                        
+                        // Chuyển hướng đến trang cảm ơn
+                        header('Location: index.php?act=camon');
+                        exit; // Dừng script để tránh tiếp tục thực hiện sau khi chuyển hướng
+                    }
+                }
+                include 'view/cart/thanhtoan.php'; // Hiển thị lại trang thanh toán nếu không có POST
             break;
-            case 'dang_ky':
+            
+        case 'dang_ky':
                 if (isset($_POST['dangky'])) {
                     $username = $_POST['username'];
                     $password = $_POST['password'];
@@ -125,7 +148,7 @@ if (isset($_GET['act']) && ($_GET['act'] != "")) {
                 }
                 include "./view/taikhoan/dang_ky.php";
                 break;
-                case 'dang_nhap':
+        case 'dang_nhap':
                     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['dang_nhap'])) {
                         // Kiểm tra và lấy dữ liệu đầu vào
                         $username = isset($_POST['username']) ? htmlspecialchars(trim($_POST['username'])) : '';
@@ -149,12 +172,14 @@ if (isset($_GET['act']) && ($_GET['act'] != "")) {
                 
                     // Gửi biến thông báo tới view
                     include "./view/taikhoan/dang_nhap.php";
-                    break;
+            break;
                 
         case 'lienhe':
             include 'view/lienhe.php';
         case 'blog':
             include 'view/blog.php';
+        case 'camon':
+            include 'view/camon.php';
        
     }
 } else {

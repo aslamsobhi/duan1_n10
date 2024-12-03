@@ -136,7 +136,7 @@
                 <div class="col-xl-4 offset-xl-1 col-lg-5 product-main-details mt-md--50">
                     <div class="product-summary pl-lg--30 pl-md--0">
                         <form action="index.php?act=themgiohang" method="post" class="variation-form mb--20">
-                            <h3 class="product-title mb--20"><?=$name?></h3>
+                            <h3 class="product-title mb--20"><?=htmlentities($name)?></h3>
                             <p class="product-short-description mb--20">
                                 <?php echo htmlspecialchars($description); ?>
                             </p>
@@ -149,10 +149,11 @@
                                     <?php foreach ($load__size as $size): ?>
                                     <?php extract($size); ?>
                                     <label
-                                        class="btn btn-outline-primary btn-sm size-label <?php echo $name === 'S' ? 'active' : ''; ?>">
-                                        <input type="radio" name="size" value="<?php echo htmlspecialchars($name); ?>"
-                                            class="d-none" <?php echo $name === 'S' ? 'checked' : ''; ?> />
-                                        <?php echo htmlspecialchars($name); ?>
+                                        class="btn btn-outline-primary btn-sm size-label <?php echo $namesize === 'S' ? 'active' : ''; ?>">
+                                        <input type="radio" name="size"
+                                            value="<?php echo htmlspecialchars($namesize); ?>" class="d-none"
+                                            <?php echo $namesize === 'S' ? 'checked' : ''; ?> />
+                                        <?php echo htmlspecialchars($namesize); ?>
                                     </label>
                                     <?php endforeach; ?>
                                 </div>
@@ -176,74 +177,68 @@
                     </div>
                 </div>
             </div>
-            <div class="row justify-content-center mb--77 mb-md--57">
-            </div>
-            <div class="nav nav-tabs mb--35 mb-sm--25" id="product-tab" role="tablist">
+        </div>
+        <div class="container">
+            <div class="nav nav-tabs mb-4" id="product-tab" role="tablist">
                 <button type="button" class="nav-link active" id="nav-description-tab" data-bs-toggle="tab"
                     data-bs-target="#nav-description" role="tab" aria-selected="true">
                     <span>Sản Phẩm Liên Quan</span>
                 </button>
             </div>
-            <?php
-        foreach ($load__sp__cungloai as $cungloai) {
-        extract($cungloai);
-        $productLink = "index.php?act=chitietsp&id=" . htmlspecialchars($id);
-        echo '
-        <div class="col-lg-3 col-md-4 col-sm-6 mb--65 mb-md--50">
-            <div class="payne-product">
-                <div class="product__inner">
-                    <div class="product__image">
-                        <figure class="product__image--holder">
-                            <a href="' . $productLink . '">
-                                <img src="'.$img_path.$product_image.'" alt="Product">
-                            </a>
-                        </figure>
-                        <a href="' . $productLink . '" class="product-overlay"></a>
-                        <div class="product__action">
-                            <a href="' . $productLink . '" class="action-btn" title="Quick view">
-                                <i class="fa fa-eye"></i>
-                                <span class="sr-only">Quick view</span>
-                            </a>
-                            <a href="' . $productLink . '" class="action-btn" title="Add to wishlist">
-                                <i class="fa fa-heart-o"></i>
-                                <span class="sr-only">Add to wishlist</span>
-                            </a>
-                            <a href="' . $productLink . '" class="action-btn" title="Add to compare">
-                                <i class="fa fa-repeat"></i>
-                                <span class="sr-only">Add To Compare</span>
-                            </a>
-                            <a href="index.php?act=giohang" class="action-btn" title="Mua Ngay">
-                                <i class="fa fa-shopping-cart"></i>
-                                <span class="sr-only">Mua Ngay</span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="product__info">
-                        <div class="product__info--left">
-                            <h3 class="product__title">
-                                <a href="' . $productLink . '">' . $name . '</a>
-                            </h3>
-                            <div class="product__price">
-                                <span class="money">' .number_format($price,0, ',', '.').'</span>
-                                <span class="sign">VND</span>
+            <div class="row">
+                <?php
+            foreach ($load__sp__cungloai as $cungloai) {
+                extract($cungloai);
+                $productLink = "index.php?act=chitietsp&id=" . htmlspecialchars($id);
+                echo '
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <div class="payne-product card h-100">
+                        <div class="product__inner">
+                            <div class="product__image">
+                                <figure class="product__image--holder">
+                                    <a href="' . $productLink . '">
+                                        <img src="' . $img_path . $product_image . '" alt="Product" class="card-img-top">
+                                    </a>
+                                </figure>
+                                <div class="product__action justify-content-center mt-2">
+                                    <a href="' . $productLink . '" class="btn btn-outline-secondary btn-sm me-1" title="Xem nhanh">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+                                    <a href="' . $productLink . '" class="btn btn-outline-secondary btn-sm me-1" title="Thêm vào yêu thích">
+                                        <i class="fa fa-heart-o"></i>
+                                    </a>
+                                    <a href="' . $productLink . '" class="btn btn-outline-secondary btn-sm me-1" title="So sánh">
+                                        <i class="fa fa-repeat"></i>
+                                    </a>
+                                    <a href="index.php?act=giohang" class="btn btn-outline-primary btn-sm" title="Mua ngay">
+                                        <i class="fa fa-shopping-cart"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="product__info p-3">
+                                <h5 class="product__title mb-2">
+                                    <a href="' . $productLink . '" class="text-decoration-none text-dark">' . $name . '</a>
+                                </h5>
+                                <div class="product__price mb-2">
+                                    <span class="fw-bold text-danger">' . number_format($price, 0, ',', '.') . '</span> <span class="text-muted">VND</span>
+                                </div>
+                                <div class="product__rating text-warning">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
                             </div>
                         </div>
-                        <div class="product__info--right">
-                            <span class="product__rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </span>
-                        </div>
                     </div>
-                </div>
-            </div>
-        </div>';
-        }
+                </div>';
+            }
         ?>
+            </div>
         </div>
 
     </div>
-    </section>
+
+
+</div>

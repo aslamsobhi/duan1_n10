@@ -11,7 +11,6 @@
         </div>
     </div>
 </section>
-<!-- Breadcrumb area End -->
 
 <!-- Main Content Wrapper Start -->
 <div class="main-content-wrapper">
@@ -42,7 +41,7 @@
             <div class="row flex-equal">
                 <!-- Chi Tiết Thanh Toán -->
                 <form action="index.php?act=thanhtoan" method="post" class="row flex-equal">
-                    <input type="hidden" name="total_price" value="<?$tong?>">
+                    <input type="hidden" name="total_price" value="<?php echo $tong; ?>"> <!-- Đảm bảo giá trị $tong được in đúng -->
                     <div class="col-lg-6 col-xl-6">
                         <div class="checkout-title mt--10">
                             <h2>Chi Tiết Thanh Toán</h2>
@@ -53,7 +52,7 @@
                                     <label for="billing_name" class="form__label">Họ Tên <span
                                             class="required">*</span></label>
                                     <input type="text" name="customer_name" id="customer_name"
-                                        class="form__input mb--30" placeholder="">
+                                        class="form__input mb--30" placeholder="Nhập họ tên của bạn" required>
                                 </div>
                             </div>
                             <div class="row mb--20">
@@ -61,25 +60,28 @@
                                     <label for="billing_streetAddress" class="form__label">Địa Chỉ <span
                                             class="required">*</span></label>
                                     <input type="text" name="shipping_address" id="shipping_address"
-                                        class="form__input mb--30" placeholder="">
+                                        class="form__input mb--30" placeholder="Nhập địa chỉ của bạn" required>
                                 </div>
                             </div>
                             <div class="row mb--20">
                                 <div class="form__group col-12">
                                     <label for="billing_phone" class="form__label">Số Điện thoại <span
                                             class="required">*</span></label>
-                                    <input type="text" name="customer_phone" id="customer_phone" class="form__input">
+                                    <input type="text" name="customer_phone" id="customer_phone" class="form__input"
+                                        placeholder="Nhập số điện thoại của bạn" required>
                                 </div>
                             </div>
                             <div class="row mb--20">
                                 <div class="form__group col-12">
                                     <label for="customer_email" class="form__label">Email <span
                                             class="required">*</span></label>
-                                    <input type="email" name="customer_email" id="customer_email" class="form__input">
+                                    <input type="email" name="customer_email" id="customer_email" class="form__input"
+                                        placeholder="Nhập email của bạn" required>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                     <!-- Đơn Hàng của bạn -->
                     <div class="col-lg-6 col-xl-6">
                         <div class="order-details">
@@ -88,38 +90,33 @@
                             </div>
                             <div class="table-content table-responsive mb--30">
                                 <table class="table order-table order-table-2">
-                                    <thead>
-                                        <tr>
-                                            <th>Sản phẩm</th>
-                                            <th class="text-end">Tổng Cộng</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th>Aliquam lobortis est
-                                                <strong><span>&#10005;</span>1</strong>
-                                            </th>
-                                            <td class="text-end">$80.00</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Auctor gravida enim
-                                                <strong><span>&#10005;</span>1</strong>
-                                            </th>
-                                            <td class="text-end">$60.00</td>
-                                        </tr>
-                                    </tbody>
+                                    <?php
+                                        if (isset($_SESSION['giohang']) && count($_SESSION['giohang']) > 0) {
+                                            $tong = 0;
+                                            foreach ($_SESSION['giohang'] as $item) {
+                                                $name = isset($item[1]) ? htmlspecialchars($item[1]) : 'không có tên sản phẩm';
+                                                $price = isset($item[3]) ? (float)$item[3] : 0;
+                                                $quantity = isset($item[4]) ? (int)$item[4] : 0;
+                                                
+                                                $total = $price * $quantity;
+                                                $tong += $total;
+                                                echo '
+                                                    <tbody>
+                                                        <tr>
+                                                            <th>' . $name . ' <strong><span>&#10005;</span>' . $quantity . '</strong></th>
+                                                            <td class="text-end">' . number_format($total, 0, ',', '.') . ' VNĐ</td>
+                                                        </tr>
+                                                    </tbody>
+                                                ';
+                                            }
+                                        }
+                                    ?>
                                     <tfoot>
-                                        <tr class="cart-subtotal">
-                                            <th>Tổng Cộng</th>
-                                            <td class="text-end">$140.00</td>
-                                        </tr>
-                                        <tr class="shipping">
-                                            <th>Phí vận chuyển</th>
-                                            <td class="text-end">$20.00</td>
-                                        </tr>
                                         <tr class="order-total">
                                             <th>Tổng Đơn Hàng</th>
-                                            <td class="text-end"><span class="order-total-ammount">$160.00</span></td>
+                                            <td class="text-end"><span
+                                                    class="order-total-ammount"><?= number_format($tong, 0, ',', '.') ?>
+                                                    VNĐ</span></td>
                                         </tr>
                                     </tfoot>
                                 </table>
@@ -155,4 +152,4 @@
         </div>
     </div>
 </div>
-<!-- Main Content Wrapper Start -->
+<!-- Main Content Wrapper End -->

@@ -26,22 +26,31 @@ function pdo_execute($sql)
     }
 }
 // truy vấn nhiều dữ liệu
-function pdo_query($sql)
+function pdo_query($sql, ...$params)
 {
-    $sql_args = array_slice(func_get_args(), 1);
-
     try {
+        // Kết nối với cơ sở dữ liệu
         $conn = pdo_get_connection();
+        
+        // Chuẩn bị câu truy vấn
         $stmt = $conn->prepare($sql);
-        $stmt->execute($sql_args);
-        $rows = $stmt->fetchAll();
+        
+        // Thực thi câu truy vấn với tham số đã được truyền vào
+        $stmt->execute($params);
+        
+        // Lấy tất cả kết quả
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
         return $rows;
     } catch (PDOException $e) {
+        // Xử lý lỗi (nếu có)
         throw $e;
     } finally {
+        // Đảm bảo kết nối sẽ được đóng sau khi sử dụng
         unset($conn);
     }
 }
+
 // truy vấn  1 dữ liệu
 function pdo_query_one($sql)
 {
@@ -59,6 +68,4 @@ function pdo_query_one($sql)
         unset($conn);
     }
 }
-
-
 pdo_get_connection();

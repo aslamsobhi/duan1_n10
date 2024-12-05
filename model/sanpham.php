@@ -53,11 +53,12 @@ function loadone_sanpham($id)
     $sp = pdo_query_one($sql);
     return $sp;
 }
-function load_sanpham_cungloai($id,$category_id){
-    $sql = "select * from products where category_id=".$category_id." and category_id <>".$id;
+function load_sanpham_cungloai($id, $category_id) {
+    $sql = "SELECT * FROM products WHERE category_id = $category_id AND id <> $id AND deleted_at IS NULL";
     $listsp = pdo_query($sql);
     return $listsp;
 }
+
 function loadAll_size(){
     $sql= "select * from sizes order by id asc";
     $size = pdo_query($sql);

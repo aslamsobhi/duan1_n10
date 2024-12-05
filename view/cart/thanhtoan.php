@@ -41,7 +41,8 @@
             <div class="row flex-equal">
                 <!-- Chi Tiết Thanh Toán -->
                 <form action="index.php?act=thanhtoan" method="post" class="row flex-equal">
-                    <input type="hidden" name="total_price" value="<?php echo $tong; ?>"> <!-- Đảm bảo giá trị $tong được in đúng -->
+                    <input type="hidden" name="total_price" value="<?= $tong ?>">
+                    <!-- Đảm bảo giá trị $tong được in đúng -->
                     <div class="col-lg-6 col-xl-6">
                         <div class="checkout-title mt--10">
                             <h2>Chi Tiết Thanh Toán</h2>
@@ -81,7 +82,6 @@
                             </div>
                         </div>
                     </div>
-
                     <!-- Đơn Hàng của bạn -->
                     <div class="col-lg-6 col-xl-6">
                         <div class="order-details">
@@ -122,12 +122,6 @@
                                 </table>
                             </div>
                             <div class="checkout-payment">
-                                <div class="payment-group mb--10">
-                                    <div class="payment-radio">
-                                        <input type="radio" value="bank" name="payment_method" id="bank" checked>
-                                        <label class="payment-label" for="bank">Chuyển khoản ngân hàng trực tiếp</label>
-                                    </div>
-                                </div>
                                 <div class="payment-group mb--10">
                                     <div class="payment-radio">
                                         <input type="radio" value="momo" name="payment_method" id="momo">

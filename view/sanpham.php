@@ -30,7 +30,7 @@
                                             <?php 
                                                 foreach ($list_danhmuc as $danhmuc) {
                                                     extract($danhmuc);
-                                                    echo '<option value="index.php?act=sanpham&iddm='.$id.'">'.$name.'</option>';
+                                                    echo '<option value="index.php?act=sanpham&category_id='.$id.'">'.$name.'</option>';
                                                 }
                                                 ?>
                                         </select>
@@ -51,8 +51,6 @@
                             </div>
                         </div>
                     </div>
-
-
                     <div class="shop-products">
                         <div class="row">
                             <?php
@@ -93,7 +91,7 @@
                                                     <a href="index.php?act=chitietsp&id='.$id.'">'.$name.'</a>
                                                 </h3>
                                                 <div class="product__price">
-                                                    <span class="money">'.$price.'</span>
+                                                    <span class="money">'. number_format($price, 0, ',', '.') . '</span>
                                                     <span class="sign">VND</span>
                                                 </div>
                                             </div>
@@ -125,7 +123,7 @@
                                     extract($danhmuc);
                                     echo' 
                                     <li>
-                                    <a href="index.php?act=sanpham&iddm='.$id.'">
+                                    <a href="index.php?act=sanpham&category_id='.$id.'">
                                         <span class="category-title">'.$name.'</span>
                                         <i class="fa fa-angle-double-right"></i>
                                     </a>

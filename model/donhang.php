@@ -27,8 +27,33 @@ class Order
             ':status_id' => $status_id
         ]);
     }
-    
-    
+    public function ctdonhang()
+    {
+        $sql = "SELECT o.id, o.customer_name, o.customer_email, o.customer_phone, 
+                       o.created_at, o.total_price, os.payment_status, os.shipping_status
+                FROM orders o
+                JOIN order_status os ON o.status_id = os.id
+                ORDER BY o.created_at DESC";
+        $stmt = $this->pdo->query($sql);
+        return $stmt->fetchAll();
+    }
+    public function cttungdonhang($id)
+    {
+        $sql = "SELECT * FROM orders WHERE id = :id";
+        return pdo_query_one($sql, $id);
+    }
+    public function ctdonhangitem($orderId) {
+        $conn = pdo_get_connection();  
 
-
+        $query = "SELECT oi.*, p.product_name, p.price 
+                  FROM order_items oi
+                  JOIN products p ON oi.product_id = p.id
+                  WHERE oi.order_id = :order_id";
+        
+        $stmt = $conn->prepare($query);
+        $stmt->bindParam(':order_id', $orderId, PDO::PARAM_INT);
+        $stmt->execute();
+        
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

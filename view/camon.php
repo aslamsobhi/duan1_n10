@@ -71,7 +71,7 @@
             <h1>Cảm ơn bạn đã đặt hàng!</h1>
             <p>Chúng tôi rất trân trọng sự ủng hộ của bạn. Đơn hàng của bạn đang được xử lý và sẽ giao trong thời gian
                 sớm nhất.</p>
-            <a href="index.php?act=donhang" class="btn btn-primary">Xem đơn hàng của bạn</a>
+            <a href="index.php?act=ctdonhang" class="btn btn-primary">Xem đơn hàng của bạn</a>
             <a href="index.php" class="btn btn-secondary">Quay về trang chủ</a>
         </div>
     </div>

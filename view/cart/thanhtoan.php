@@ -41,7 +41,7 @@
             <div class="row flex-equal">
                 <!-- Chi Tiết Thanh Toán -->
                 <form action="index.php?act=thanhtoan" method="post" class="row flex-equal">
-                    <input type="hidden" name="total_price" value="<?= $tong ?>">
+
                     <!-- Đảm bảo giá trị $tong được in đúng -->
                     <div class="col-lg-6 col-xl-6">
                         <div class="checkout-title mt--10">
@@ -138,6 +138,7 @@
                                     <input type="submit" class="btn btn-size-md btn-fullwidth" value="Đặt Hàng"
                                         name="thanhtoan">
                                 </div>
+                                <input type="hidden" name="total_price" value="<?= $tong ?>">
                             </div>
                         </div>
                     </div>

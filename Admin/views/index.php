@@ -407,27 +407,27 @@ case "delete_user":
                         echo "Order ID is missing.";
                     }
                     break;
-        
-                case "update_status":
-                    // Cập nhật trạng thái đơn hàng
-                    if (isset($_POST['order_id'], $_POST['payment_status'], $_POST['shipping_status'])) {
-                        $orderId = $_POST['order_id'];
-                        $paymentStatus = $_POST['payment_status'];
-                        $shippingStatus = $_POST['shipping_status'];
-        
-                        $order->updateOrderStatus($orderId, $paymentStatus, $shippingStatus);
-                        header("Location: index.php?act=list");
-                    } else {
-                        echo "Missing parameters.";
-                    }
-                    break;
-
+                    case "update_status":
+                        // Kiểm tra đủ tham số từ form
+                        if (isset($_POST['order_id'], $_POST['payment_status'], $_POST['shipping_status'])) {
+                            $orderId = $_POST['order_id'];
+                            $paymentStatus = $_POST['payment_status'];
+                            $shippingStatus = $_POST['shipping_status'];
+                            // Gọi phương thức cập nhật trạng thái
+                            $order->updateOrderStatus($orderId, $paymentStatus, $shippingStatus);
+                            // Điều hướng về danh sách đơn hàng
+                            header("Location: index.php?act=list_order");
+                            exit;
+                        } else {
+                            echo "Thiếu thông tin cần thiết.";
+                        }
+                        break;
+                    
         ////////////////////////////////////////////////////////////////////////// Danh sách mã giảm giá
         case "list_discount":
             $discount_codes = DiscountCode::getAll();
             include "Discount_code/list_discount.php";
             break;
-
         // Thêm mới mã giảm giá
         case "add_discount":
             if (isset($_POST['submit'])) {
@@ -447,13 +447,11 @@ case "delete_user":
                 } else {
                     $error = "Vui lòng nhập đầy đủ thông tin!";
                 }
-
                 DiscountCode::add($code, $discount_percent, $start_date, $expiry_date);
                 header("Location: index.php?act=list_discount");
             }
             include "Discount_code/add_discount.php";
             break;
-
         // Sửa mã giảm giá
         case 'edit_discount':
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -463,9 +461,7 @@ case "delete_user":
                 $start_date = $_POST['start_date'];
                 $expiry_date = $_POST['expiry_date'];
                 $is_active = isset($_POST['is_active']) ? 1 : 0;
-        
                 DiscountCode::update($id, $name, $discount_percent, $expiry_date, $is_active);
-        
                 $_SESSION['message'] = "Mã giảm giá đã được cập nhật.";
                 header("Location: index.php?act=list_discount");
                 exit();
@@ -475,7 +471,6 @@ case "delete_user":
             $discount_code = DiscountCode::getOne($id);
             include 'Discount_code/edit_discount.php';
             break;
-
             // chuyển trạng thái
             case 'toggle_status':
                 $id = $_GET['id'];

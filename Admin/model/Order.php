@@ -40,7 +40,8 @@ class Order
     public function updateOrderStatus($orderId, $paymentStatus, $shippingStatus)
 {
     $sql = "UPDATE order_status 
-            SET payment_status = :payment_status, shipping_status = :shipping_status 
+            SET payment_status = :payment_status, 
+                shipping_status = :shipping_status 
             WHERE id = (SELECT status_id FROM orders WHERE id = :id)";
     $stmt = $this->pdo->prepare($sql);
     return $stmt->execute([

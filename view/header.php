@@ -31,7 +31,7 @@
     <!-- Main Wrapper Start -->
     <div class="wrapper">
         <!-- Header Start -->
-        <!-- <header class="header header-default site-header">
+        <header class="header header-default site-header">
             <div class="header__outer">
                 <div class="header__inner header--fixed">
                     <div class="container">
@@ -51,16 +51,12 @@
                                     <ul class="mainmenu">
                                         <li class="mainmenu__item menu-item-has-children position-relative">
                                             <a href="index.php" class="mainmenu__link">Trang Chủ</a>
-
                                         </li>
                                         <li class="mainmenu__item menu-item-has-children position-static">
                                             <a href="index.php?act=sanpham" class="mainmenu__link">Sản Phẩm</a>
-
                                         </li>
-
                                         <li class="mainmenu__item menu-item-has-children position-relative">
                                             <a href="index.php?act=blog" class="mainmenu__link">Blog</a>
-
                                         </li>
                                         <li class="mainmenu__item">
                                             <a href="index.php?act=lienhe" class="mainmenu__link">Liên Hệ & Hỗ Trợ</a>
@@ -71,12 +67,12 @@
                             <div class="header__col header__right">
                                 <div class="toolbar-item d-none d-lg-block">
                                     <a href="index.php?act=dang_nhap" class="toolbar-btn">
-                                        <span>Login</span>
+                                        <span>Đăng nhập</span>
                                     </a>
                                 </div>
                                 <div class="toolbar-item d-none d-lg-block">
                                     <a href="index.php?act=dang_ky" class="toolbar-btn">
-                                        <span>Register</span>
+                                        <span>Đăng Ký</span>
                                     </a>
                                 </div>
                                 <div class="toolbar-item d-block d-lg-none">
@@ -110,5 +106,5 @@
                 </div>
                 <div class="header-sticky-height"></div>
             </div>
-        </header> -->
+        </header>
         <!-- Header End -->
